@@ -1,0 +1,43 @@
+<h2>BlackJack!</h2>
+<p>Welcome <%=session[:username]%>! You still got $<%=session[:money]%>.</p>
+<div id='dealer_block' class='well'>
+	<h4>Dealer's cards</h4>
+	<% if session[:dealer_turn] == false && session[:player_turn] == true%>
+		<img src='/images/cards/cover.jpg' class='card_image'>
+		<img src=<%=show_card_image(session[:dealer_cards][1])%> class='card_image'>
+	<% else %>
+		<% session[:dealer_cards].each do |c| %>		
+			<img src=<%=show_card_image(c)%> class='card_image'>
+		<% end %>
+	<% end %>
+</div>
+
+<%if session[:player_turn] == false%>
+	<p>Dealer has total <%=session[:dealer_total]%> points.</p>
+<%end%>
+
+<%if session[:dealer_turn]%>
+	<form action='/game/dealer_hit' method='post' >
+			<button type="submit" class="btn btn-primary btn-large">Dealer's turn -></button>
+	</form>
+<%end%>
+
+<br>
+
+<div id='player_block' class='well'>	
+	<h4>Player's cards</h4>
+	<% session[:player_cards].each do |c| %>
+		<!-- <%=show_card_image(c)%> -->
+		<img src=<%=show_card_image(c)%> class='card_image'>
+	<% end %>	
+</div>
+<p></p>
+<p><%=session[:username]%> has total <%=session[:player_total]%> points.</p>
+<%if session[:player_turn]%>
+	<form action='/game/hit' method='post' class='button_block'>
+			<button type="submit" class="btn btn-success btn-large">Hit</button>
+	</form>
+	<form action='/game/stay' method='post' class='button-block'>
+			<button type="submit" class="btn btn-warning btn-large">Stay</button>
+	</form>
+<%end%>

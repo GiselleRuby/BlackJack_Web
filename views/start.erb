@@ -1,0 +1,11 @@
+<h4>Welcome! <%=session[:username]%></h4>
+
+<form action='/bet_action' method='post'>
+	<p>How much do you want to bet? You still have $<%=session[:money]%></p>
+	<div class="form-inline">
+		<input type='text' name='bet_money'/>
+
+		<!-- <input type='submit' class='btn'/> -->
+		<button type='submit' class='btn btn-primary'>Start</button>
+	</div>
+</form>

@@ -1,0 +1,19 @@
+.block{
+	display: block;
+	height: 280px;
+	background-color:#cee6e0;
+	border: 5px solid #aaaaaa;
+	border-radius: 5px;
+}
+
+.button_block{
+	float: left;
+	margin-right: 10px;
+	/*display: block;*/
+	/*margin: 0 0 20 0;*/
+	/*width: 20;*/
+}
+
+.card_image{
+	margin: 0px 5px 5px 0;
+}
