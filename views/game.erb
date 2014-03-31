@@ -1,5 +1,17 @@
 <h2>BlackJack!</h2>
 <p>Welcome <%=session[:username]%>! You still got $<%=session[:money]%>.</p>
+
+<% if session[:win] != 0 %>
+	<p>Another round?
+		<form action='/' method='get' class='button_block'>
+			<button type="submit" class="btn btn-primary btn">Yes</button>
+	</form>
+	<form action='/end_game' method='get' class='button-block'>
+			<button type="submit" class="btn btn">No</button>
+	</form>
+	</p>
+<% end%>
+
 <div id='dealer_block' class='well'>
 	<h4>Dealer's cards</h4>
 	<% if session[:dealer_turn] == false && session[:player_turn] == true%>

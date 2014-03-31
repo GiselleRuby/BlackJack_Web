@@ -16,6 +16,11 @@ get '/' do
   end
 end
 
+get '/end_game' do
+	# redirect '/game_over'
+	erb :game_over
+end
+
 get '/start_over' do
 	session[:username] = nil
 	redirect '/'
