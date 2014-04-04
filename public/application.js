@@ -1,13 +1,4 @@
 $(document).ready(function(){
-	// $('#test_a').click(function(){
-	// 	alert("HiHiHi");
-	// 	return false;
-	// });
-
-	// $('#hit_form').click(function(){
-	// 	alert('YAYAYA')
-	// 	return false;//false 代表process結束，true會持續進行
-	// });
 
 	// $('#hit_form button').click(function(){
 	$(document).on("click","#hit_form button",function() {
