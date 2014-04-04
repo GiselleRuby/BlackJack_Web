@@ -1,55 +1,74 @@
-<h2>BlackJack!</h2>
-<p>Welcome <%=session[:username]%>! You still got $<%=session[:money]%>.</p>
+<div id='game'>
 
-<% if session[:win] != 0 %>
-	<p>Another round?
-		<form action='/' method='get' class='button_block'>
-			<button type="submit" class="btn btn-primary btn">Yes</button>
-	</form>
-	<form action='/end_game' method='get' class='button-block'>
-			<button type="submit" class="btn btn">No</button>
-	</form>
-	</p>
-<% end%>
+	<%if @warnning %>
+    <div class="alert"><%=@warnning%></div>
+  <% end %>
 
-<div id='dealer_block' class='well'>
-	<h4>Dealer's cards</h4>
-	<% if session[:dealer_turn] == false && session[:player_turn] == true%>
-		<img src='/images/cards/cover.jpg' class='card_image'>
-		<img src=<%=show_card_image(session[:dealer_cards][1])%> class='card_image'>
-	<% else %>
-		<% session[:dealer_cards].each do |c| %>		
-			<img src=<%=show_card_image(c)%> class='card_image'>
+  <%if @error %>
+    <div class="alert alert-error"><%=@error%></div>
+  <% end %>
+  
+  <%if @success %>
+    <div class="alert alert-success"><%=@success%></div>
+  <% end %>
+
+	<h2>BlackJack!</h2>
+	<p>Welcome <%=session[:username]%>! You still got $<%=session[:money]%>, and you bet $<%=session[:bet_money]%> for this round.</p>
+
+	<% if session[:win] != 0 %>
+		<p>Another round?
+			<form action='/' method='get' class='button_block'>
+				<button type="submit" class="btn btn-primary btn">Yes</button>
+		</form>
+		<form action='/end_game' method='get' class='button-block'>
+				<button type="submit" class="btn btn">No</button>
+		</form>
+		</p>
+	<% end%>
+
+	<div id='dealer_block' class='well'>
+		<h4>Dealer's cards</h4>
+		<% if session[:dealer_turn] == false && session[:player_turn] == true%>
+			<img src='/images/cards/cover.jpg' class='card_image'>
+			<img src=<%=show_card_image(session[:dealer_cards][1])%> class='card_image'>
+		<% else %>
+			<% session[:dealer_cards].each do |c| %>		
+				<img src=<%=show_card_image(c)%> class='card_image'>
+			<% end %>
 		<% end %>
-	<% end %>
-</div>
+	</div>
 
-<%if session[:player_turn] == false%>
-	<p>Dealer has total <%=session[:dealer_total]%> points.</p>
-<%end%>
+	<%if session[:player_turn] == false%>
+		<p>Dealer has total <%=session[:dealer_total]%> points.</p>
+	<%end%>
 
-<%if session[:dealer_turn]%>
-	<form action='/game/dealer_hit' method='post' >
-			<button type="submit" class="btn btn-primary btn-large">Dealer's turn -></button>
-	</form>
-<%end%>
+	<%if session[:dealer_turn]%>
+		<!-- <form id='dealer_hit_form' action='/game/dealer_hit' method='post' > -->
+		<form id='dealer_hit_form'>
+				<button type="submit" class="btn btn-primary btn-large">Dealer's turn -></button>
+		</form>
+	<%end%>
 
-<br>
+	<br>
+	<a id='test_a' href='#'>This is JQuery test.</a>
 
-<div id='player_block' class='well'>	
-	<h4>Player's cards</h4>
-	<% session[:player_cards].each do |c| %>
-		<!-- <%=show_card_image(c)%> -->
-		<img src=<%=show_card_image(c)%> class='card_image'>
-	<% end %>	
-</div>
-<p></p>
-<p><%=session[:username]%> has total <%=session[:player_total]%> points.</p>
-<%if session[:player_turn]%>
-	<form action='/game/hit' method='post' class='button_block'>
+	<div id='player_block' class='well'>	
+		<h4>Player's cards</h4>
+		<% session[:player_cards].each do |c| %>
+			<!-- <%=show_card_image(c)%> -->
+			<img src=<%=show_card_image(c)%> class='card_image'>
+		<% end %>	
+	</div>
+	<p></p>
+	<p><%=session[:username]%> has total <%=session[:player_total]%> points.</p>
+	<%if session[:player_turn]%>
+		<!-- <form id='hit_form' action='/game/hit' method='post' class='button_block'> -->
+		<form id='hit_form' class='button_block'>
 			<button type="submit" class="btn btn-success btn-large">Hit</button>
-	</form>
-	<form action='/game/stay' method='post' class='button-block'>
+		</form>
+		<!-- <form id='stay_form' action='/game/stay' method='post' class='button-block'> -->
+		<form id='stay_form' class='button-block'>
 			<button type="submit" class="btn btn-warning btn-large">Stay</button>
-	</form>
-<%end%>
+		</form>
+	<%end%>
+</div>

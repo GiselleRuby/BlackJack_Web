@@ -1,5 +1,6 @@
 <h4>Welcome! <%=session[:username]%></h4>
 
+<% if session[:money] > 0%>
 <form action='/bet_action' method='post'>
 	<p>How much do you want to bet? You still have $<%=session[:money]%></p>
 	<div class="form-inline">
@@ -9,3 +10,9 @@
 		<button type='submit' class='btn btn-primary'>Start</button>
 	</div>
 </form>
+<% else %>
+	<p>You have no money! Want to start over again?</p>
+	<form action='/start_over' method='get' class='button_block'>
+		<button type="submit" class="btn btn-primary btn">Yes</button>
+	</form>
+<% end %>

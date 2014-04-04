@@ -63,13 +63,14 @@ post '/myaction' do
 end
 
 post '/bet_action' do
-	if params[:bet_money].to_i <= session[:money]
+	if params[:bet_money].to_i <= session[:money] &&
+		 params[:bet_money].to_i > 0	
 		session[:bet_money] = params[:bet_money].to_i
 		
 		# erb :game
 		redirect '/new_game'
 	else
-		@error = "Your bet cannot larger than #{session[:money]}"
+		@error = "Your bet cannot larger than #{session[:money]}, or zero."
 		erb :start
 	end
 end
